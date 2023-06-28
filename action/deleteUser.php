@@ -12,14 +12,14 @@ $statement->execute([':idutilisateur' => $id]);
 // si l'utilisateur est un admin on le redirige vers la page admin
 if (isset($_SESSION['admin'])) {
 
-	$_SESSION['flash']['danger'] = "L'utilisateur a bien été supprimé";
+	$_SESSION['flash'] = "L'utilisateur a bien été supprimé";
 	header("Location: ../admin.php");
 	exit();
 
 } else { // sinon on le redirige vers la page d'accueil
 
 	session_destroy();
-	$_SESSION['flash']['danger'] = "Votre compte a bien été supprimé";
+	$_SESSION['flash'] = "Votre compte a bien été supprimé";
 	header("Location: ../index.php");
 	exit();
 

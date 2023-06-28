@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 		if ($user) {
 
 			session_start();
-			$_SESSION['flash']['danger'] = "Cette adresse mail est déjà utilisée";
+			$_SESSION['flash'] = "Cette adresse mail est déjà utilisée";
 			header('Location: ../inscription.php');
 			exit();
 
@@ -37,12 +37,12 @@ if (isset($_POST['submit'])) {
 			if(!isset($_SESSION['admin']))
 			{
 				session_start();
-				$_SESSION['flash']['success'] = "Votre compte a bien été créé !";
+				$_SESSION['flash'] = "Votre compte a bien été créé !";
 				header('Location: ../connexion.php');
 				exit();
 			}else{
 				
-				$_SESSION['flash']['success'] = "L'utilisateur a bien été ajouté !";
+				$_SESSION['flash'] = "L'utilisateur a bien été ajouté !";
 				header('Location: ../admin.php');
 				exit();
 			}

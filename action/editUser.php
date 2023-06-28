@@ -13,6 +13,7 @@ if (isset($_POST['edit'])) {
 	$nom = $_POST['nom'];
 	$mail = $_POST['email'];
 	$mp = $_POST['mp'];
+	$role = $_POST['role'];
 
 	
 	// si l'utilisateur est un admin 
@@ -24,7 +25,7 @@ if (isset($_POST['edit'])) {
 		$statement = $pdo->prepare($query);
 		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':role' => $role, ':idutilisateur' => $id]);
 		// on redirige l'admin vers la page admin
-		$_SESSION['flash']['success'] = "L'utilisateur " . $nom . " a bien été modifié";
+		$_SESSION['flash'] = "L'utilisateur " . $nom . " a bien été modifié";
 		header("Location: ../admin.php");
 		exit();
 
@@ -41,7 +42,7 @@ if (isset($_POST['edit'])) {
 		$user = $statement->fetch(PDO::FETCH_OBJ);
 		// on met a jour la session
 		$_SESSION['utilisateur'] = $user;
-		$_SESSION['flash']['success'] = "Votre compte a bien été modifié";
+		$_SESSION['flash'] = "Votre compte a bien été modifié";
 		// on redirige l'utilisateur vers sa page de profil
 		header("Location: ../profil.php?id=" . $_SESSION['utilisateur']->idutilisateur);
 		exit();

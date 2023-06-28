@@ -14,7 +14,7 @@ include_once "header.php";
 <body>
 
 	<div class="container-fluid">
-		<?php if (isset($_SESSION['flash'])) : ?>
+	<?php if (isset($_SESSION['flash']) && is_array($_SESSION['flash'])) : ?>
 			<?php foreach ($_SESSION['flash'] as $type => $message) : ?>
 				<div class="m-3 p-3 alert alert-<?= $type; ?>">
 					<?= $message; ?>

@@ -10,18 +10,18 @@ logged_only();
 $query = "SELECT * FROM utilisateur";
 $statement = $pdo->prepare($query);
 $statement->execute();
-$users = $statement->fetchAll(PDO::FETCH_OBJ);?>
+$users = $statement->fetchAll(PDO::FETCH_OBJ); ?>
 
 <?php include_once "header.php"; ?>
 
 <body>
-	
+
 	<div class="container-fluid">
 		<h1>Gestion des utilisateurs</h1>
 		<h2>Bonjour administrateur: <?= $_SESSION['admin']->nom ?></h2>
 		<a href="inscription.php" class="btn btn-primary">Ajouter un utilisateur</a>
 		<!-- on affiche les messages flash -->
-		<?php if (isset($_SESSION['flash'])) : ?>
+		<?php if (isset($_SESSION['flash']) && is_array($_SESSION['flash'])) : ?>
 			<?php foreach ($_SESSION['flash'] as $type => $message) : ?>
 				<div class="m-3 p-3 alert alert-<?= $type; ?>">
 					<?= $message; ?>
