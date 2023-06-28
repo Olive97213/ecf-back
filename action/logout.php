@@ -10,7 +10,7 @@ if (isset($_SESSION['admin'])) {
 	unset($_SESSION['admin']);
 }
 // on affiche un message de succes
-$_SESSION['flash']['success'] = 'Vous êtes maintenant déconnecté';
+$_SESSION['flash'] = 'Vous êtes maintenant déconnecté';
 // on redirige l'utilisateur vers la page d'accueil
 header('Location: ../index.php');
 exit();

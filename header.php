@@ -22,7 +22,7 @@
                 <li><a href="index.php">Accueil</a></li>
                     <li><a href="inscription.php">S'inscrire</a></li>
                     <li><a href="connexion.php">Se connecter</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="action/logout.php">Déconnecter</a></li>
                 </ul>
 
             </div>

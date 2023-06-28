@@ -20,7 +20,7 @@ if (isset($_POST['edit'])) {
 		// on recupere le role de l'utilisateur
 		$role = intval($_POST['role']);
 		// on modifie l'utilisateur dans la base de données
-		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp, role = :role WHERE id = :idutilisateur";
+		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp, role = :role WHERE idutilisateur = :idutilisateur";
 		$statement = $pdo->prepare($query);
 		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':role' => $role, ':idutilisateur' => $id]);
 		// on redirige l'admin vers la page admin
@@ -29,13 +29,13 @@ if (isset($_POST['edit'])) {
 		exit();
 
 	} else { // sinon on modifie l'utilisateur dans la base de données
-		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp WHERE id = :idutilisateur";
+		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp WHERE idutilisateur = :idutilisateur";
 		$statement = $pdo->prepare($query);
 		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':idutilisateur' => $id]);
 		// on reset la session pour mettre à jour les données de l'utilisateur
 		session_reset();
 		// on recupere les données de l'utilisateur mis a jour
-		$query = "SELECT * FROM utilisateur WHERE id = :idutilisateur";
+		$query = "SELECT * FROM utilisateur WHERE idutilisateur = :idutilisateur";
 		$statement = $pdo->prepare($query);
 		$statement->execute([':idutilisateur' => $id]);
 		$user = $statement->fetch(PDO::FETCH_OBJ);
