@@ -5,7 +5,7 @@ require_once '../include/db.php';
 session_start();
 
 // on recupere l'id de l'utilisateur dans l'url
-$id = $_GET['idutilisateur'];
+$id = $_GET['id'];
 
 // on recupere les données du formulaire
 if (isset($_POST['edit'])) {

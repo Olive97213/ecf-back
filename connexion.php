@@ -7,6 +7,8 @@ require_once "include/db.php";
 session_start();
 $message = isset($_SESSION['flash']) ? $_SESSION['flash'] : '';
 
+
+
 // Afficher le message dans le HTML
 print_r($message) ; 
 unset($_SESSION['flash']); // Supprimer le message de la session

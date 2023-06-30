@@ -6,6 +6,11 @@ require_once 'include/function.php';
 // on verifie que l'utilisateur est connecté
 logged_only();
 
+if ($_SESSION['admin']->role != 1) {
+	header("Location: profil.php");
+	exit();
+}
+
 // on recupere tous les utilisateurs
 $query = "SELECT * FROM utilisateur";
 $statement = $pdo->prepare($query);

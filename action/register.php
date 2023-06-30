@@ -26,12 +26,13 @@ if (isset($_POST['submit'])) {
 
 		}else { // sinon on l'ajoute dans la base de données
 
-			$query = "INSERT INTO utilisateur (nom, email, mp, role) VALUES (:nom, :email, :mp, :role)";
+			$query = "INSERT INTO utilisateur (nom, email, mp, role, isactive) VALUES (:nom, :email, :mp, :role, :isactive)";
 			$statement = $pdo->prepare($query);
 			$statement->bindValue(':nom', $nom);
 			$statement->bindValue(':email', $mail);
 			$statement->bindValue(':mp', $mp);
 			$statement->bindValue(':role', 0);
+			$statement->bindValue(':isactive', 1);
 			$statement->execute();
 			// on affiche un message de succes
 			if(!isset($_SESSION['admin']))

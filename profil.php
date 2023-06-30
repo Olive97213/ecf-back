@@ -1,20 +1,24 @@
 <?php
 
 require_once "include/function.php";
-
+require_once 'include/db.php';
 
 logged_only();
 
-include_once "header.php";
+// on recupere tous les utilisateurs
+$query = "SELECT * FROM utilisateur";
+$statement = $pdo->prepare($query);
+$statement->execute();
+$users = $statement->fetchAll(PDO::FETCH_OBJ);
 
-?>
 
+include_once "header.php"; ?>
 
 
 <body>
 
 	<div class="container-fluid">
-	<?php if (isset($_SESSION['flash']) && is_array($_SESSION['flash'])) : ?>
+		<?php if (isset($_SESSION['flash']) && is_array($_SESSION['flash'])) : ?>
 			<?php foreach ($_SESSION['flash'] as $type => $message) : ?>
 				<div class="m-3 p-3 alert alert-<?= $type; ?>">
 					<?= $message; ?>
