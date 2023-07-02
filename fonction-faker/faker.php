@@ -1,6 +1,6 @@
 <?php
 // require_once 'vendor/autoload.php';
-// require_once '../include/db.php';
+// require_once 'include/db.php';
 
 // use Faker\Factory;
 

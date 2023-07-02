@@ -1,4 +1,5 @@
 <?php include_once "header.php"; 
+// require_once "fonction-faker/faker.php";
 session_start();
 $message = isset($_SESSION['flash']) ? $_SESSION['flash'] : '';
 
