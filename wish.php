@@ -1,5 +1,6 @@
 <?php
 
+
 require_once "include/function.php";
 require_once 'include/db.php';
 
@@ -26,12 +27,21 @@ include_once "header.php"; ?>
         <input type="submit" name="submit" value="Créer la liste de souhaits">
     </form><br><br>
 
-    <h2>Sélectionner une liste de souhaits</h2><br>
+    <h2>Ajouter un article a une liste de souhait</h2><br>
 
     
     <?php require "action/wishSelection.php"; ?>
+
+    <!-- <form action="action/addArticle.php" method="POST">
+        <label for="article">Article :</label>
+        <input type="text" id="article" name="article" required><br>
+
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <input type="submit" name="submit" value="Ajouter article">
+    </form><br><br>
         
-</form><br><br>
+</form><br><br> -->
 
 
-    

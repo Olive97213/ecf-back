@@ -1,5 +1,7 @@
 <?php
+require_once '../include/db.php';
 
+session_start();
 
 
 if (isset($_POST['submit'])) {
@@ -8,6 +10,7 @@ if (isset($_POST['submit'])) {
 
     // Récupérer l'ID de l'utilisateur en cours
     $user = $_SESSION['utilisateur']->idutilisateur;
+    
 
     $query = "INSERT INTO listeDeSouhait (nom, description, utilisateur_idutilisateur, createdAT) VALUES (:nom, :description, :utilisateur_idutilisateur, NOW())";
     $statement = $pdo->prepare($query);
