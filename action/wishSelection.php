@@ -4,13 +4,8 @@
 
 
 
-// Assurez-vous que l'utilisateur est connecté
-if (!isset($_SESSION['utilisateur'])) {
-    // Rediriger vers la page de connexion ou afficher un message d'erreur
-    exit("Vous devez être connecté pour accéder à cette page");
-}
-
 $user = $_SESSION['utilisateur']->idutilisateur;
+
 
 // Vérifier si le formulaire a été soumis
 if (isset($_POST['submit'])) {
@@ -65,41 +60,13 @@ if (isset($_POST['idlisteDeSouhait']) && !empty($_POST['idlisteDeSouhait'])) {
     // Afficher le formulaire d'ajout d'article
     echo "<form method='POST' action=''>";
     echo "<input type='hidden' name='idlisteDeSouhait' value='" . $_POST['idlisteDeSouhait'] . "'>";
-    echo "<input type='text' name='article' placeholder='Nom de l'article' required><br>";
-    echo "<textarea name='description' placeholder='Description de l'article' required></textarea><br>";
+    echo "<input type='text' name='article' placeholder='Nom de l article' required><br>";
+    echo "<textarea name='description' placeholder='Description de l article' required></textarea><br>";
     echo "<input type='submit' name='submit' value='Ajouter'>";
     echo "</form>";
 }
 
 
-// // Assurez-vous que l'utilisateur est connecté
-// if (!isset($_SESSION['utilisateur'])) {
-//     // Rediriger vers la page de connexion ou afficher un message d'erreur
-//     exit("Vous devez être connecté pour accéder à cette page");
-// }
-
-// $user = $_SESSION['utilisateur']->idutilisateur;
-
-// $query = "SELECT idlisteDeSouhait, nom FROM listeDeSouhait WHERE utilisateur_idutilisateur = :idutilisateur";
-// $statement = $pdo->prepare($query);
-// $statement->bindParam(':idutilisateur', $user);
-// $statement->execute();
-// $listesDeSouhait = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-// // Créer une liste déroulante (select) avec les résultats
-// echo "<select id='idlisteDeSouhait' nom='nom' onchange='updateElements(this.value)'>";
-
-// // Option titre ou option vide avec libellé spécifique
-// echo "<option value='' disabled selected>Choisissez une liste de souhait</option>";
-
-// // Parcourir les résultats et afficher les options de la liste déroulante
-// foreach ($listesDeSouhait as $listeDeSouhait) {
-//     echo "<option value='" . $listeDeSouhait['idlisteDeSouhait'] . "'>" . $listeDeSouhait['nom'] . "</option>";
-// }
-
-// echo "</select>";
-
-?>
 
 
 

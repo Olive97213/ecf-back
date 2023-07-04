@@ -10,8 +10,9 @@ function logged_only()
 		header('Location: ../connexion.php');
 		exit();
 	}
+	
 
-	if (isset($_SESSION['utilisateur']) && !isset($_SESSION['admin'])) {
+	if (!isset($_SESSION['utilisateur']) && !isset($_SESSION['admin'])) {
 		// Si l'utilisateur est connecté en tant que user, vérifier s'il tente d'accéder à un profil différent
 		if ($_SESSION['utilisateur']->idutilisateur != $_GET['id']) {
 			$_SESSION['flash']['warning'] = "Vous n'avez pas le droit d'accéder à cette page";

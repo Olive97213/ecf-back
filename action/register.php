@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
 		$nom = htmlspecialchars($_POST['nom']);
 		$mail = htmlspecialchars($_POST['email']);
 		$mp = htmlspecialchars($_POST['mp']);
+		$avatar = htmlspecialchars($_POST['avatar']); // Nouveau champ pour l'URL de l'avatar
 		// on verifie que l'utilisateur n'existe pas dans la base de données
 		$query = "SELECT * FROM utilisateur WHERE email = :email";
 		$statement = $pdo->prepare($query);
@@ -26,11 +27,12 @@ if (isset($_POST['submit'])) {
 
 		}else { // sinon on l'ajoute dans la base de données
 
-			$query = "INSERT INTO utilisateur (nom, email, mp, role, isactive) VALUES (:nom, :email, :mp, :role, :isactive)";
+			$query = "INSERT INTO utilisateur (nom, email, mp, avatar, role, isactive) VALUES (:nom, :email, :mp, :avatar, :role, :isactive)";
 			$statement = $pdo->prepare($query);
 			$statement->bindValue(':nom', $nom);
 			$statement->bindValue(':email', $mail);
 			$statement->bindValue(':mp', $mp);
+			$statement->bindValue(':avatar', $avatar); // Ajout de l'URL de l'avatar
 			$statement->bindValue(':role', 0);
 			$statement->bindValue(':isactive', 1);
 			$statement->execute();

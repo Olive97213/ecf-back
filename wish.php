@@ -6,6 +6,7 @@ require_once 'include/db.php';
 
 logged_only();
 
+
 // on recupere tous les utilisateurs
 $query = "SELECT * FROM utilisateur";
 $statement = $pdo->prepare($query);

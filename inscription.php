@@ -20,8 +20,12 @@ echo $message;?>
         <label for="email">Adresse e-mail :</label>
         <input type="email" name="email" id="email"><br><br>
 
+        <input type="url" name="avatar" placeholder="URL de l'avatar">
+
         <label for="password">Mot de passe :</label>
         <input type="password" name="mp" id="password"><br><br>
+
+
 
         <input type="submit" value="S'inscrire" name="submit">
 

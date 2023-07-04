@@ -1,0 +1,45 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.container{
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 100px 50px;
+   padding: 100px 50px;
+}
+.container .liste-de-souhait{
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-self: flex-start;
+   width: 350px;
+   height: 150px;
+   background: wheat;
+   border-radius: 20px;
+   box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+   transition: 0.5s;
+}
+
+.container .liste-de-souhait:hover{
+    
+    height:  300px;
+}
+
+.container .liste-de-souhait .contenu{
+
+    position: absolute;
+    width: 100%;
+    padding: 0 30px;
+    text-align: center;
+}
+
+
+

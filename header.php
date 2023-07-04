@@ -22,6 +22,10 @@
                 <li><a href="index.php">Accueil</a></li>
                     <li><a href="inscription.php">S'inscrire</a></li>
                     <li><a href="connexion.php">Se connecter</a></li>
+                    <li><a href="wish.php">Créer listes</a></li>
+                    <li><a href="consultListe.php">Consulter listes</a></li>
+                    <li><a href="profil.php">Mon profil</a></li>
+
                     <li><a href="action/logout.php">Déconnecter</a></li>
                 </ul>
 
