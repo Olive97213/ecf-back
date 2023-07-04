@@ -12,7 +12,7 @@
 }
 
 .inscription form {
-    margin-top: 5em; 
+    margin-top: 2em; 
     display: flex;
     flex-direction: column;
     align-items: center; /* Centre le contenu horizontalement */
@@ -29,8 +29,10 @@
 
 .inscription form input[type="texte"],
 .inscription form input[type="email"],
-.inscription form input[type="password"] {
+.inscription form input[type="password"], 
+.inscription form input[type="url"] {
     width: 250px;
     height: 20px;
+    margin-top:1em;
     border-radius: 0.8em;
 }

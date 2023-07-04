@@ -5,7 +5,7 @@ require_once 'include/db.php';
 logged_only();
 
 // Récupérer toutes les listes de souhaits avec le nom de l'utilisateur créateur
-$query = "SELECT l.*, u.nom AS createur FROM listeDeSouhait l JOIN utilisateur u ON l.utilisateur_idutilisateur = u.idutilisateur";
+$query = "SELECT l.*, u.nom AS createur, u.avatar FROM listeDeSouhait l JOIN utilisateur u ON l.utilisateur_idutilisateur = u.idutilisateur";
 $statement = $pdo->prepare($query);
 $statement->execute();
 $listesDeSouhait = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -19,6 +19,9 @@ include_once "header.php";
 
   <?php foreach ($listesDeSouhait as $listeDeSouhait) : ?>
     <div class="liste-de-souhait">
+      <?php if (!empty($listeDeSouhait->avatar)) : ?>
+          <img src="<?php echo $listeDeSouhait->avatar; ?>" alt="Avatar de <?php echo $listeDeSouhait->createur; ?>">
+        <?php endif; ?>
       <div class="contenu">
         <h3><?php echo $listeDeSouhait->nom; ?></h3>
         <p><?php echo $listeDeSouhait->description; ?></p>
@@ -40,6 +43,8 @@ include_once "header.php";
           echo "</ul>";
         }
         ?>
+
+        
 
         <p>Créateur : <?php echo $listeDeSouhait->createur; ?></p>
         <p>Date de publication : <?php echo $listeDeSouhait->createdAt; ?></p>

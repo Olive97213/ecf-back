@@ -13,6 +13,7 @@ if (isset($_POST['edit'])) {
 	$nom = $_POST['nom'];
 	$mail = $_POST['email'];
 	$mp = $_POST['mp'];
+	$avatar = $_POST['avatar'];
 	$role = $_POST['role'];
 
 	
@@ -21,18 +22,18 @@ if (isset($_POST['edit'])) {
 		// on recupere le role de l'utilisateur
 		$role = intval($_POST['role']);
 		// on modifie l'utilisateur dans la base de données
-		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp, role = :role WHERE idutilisateur = :idutilisateur";
+		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp, avatar = :avatar, role = :role WHERE idutilisateur = :idutilisateur";
 		$statement = $pdo->prepare($query);
-		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':role' => $role, ':idutilisateur' => $id]);
+		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':avatar' => $avatar, ':role' => $role, ':idutilisateur' => $id]);
 		// on redirige l'admin vers la page admin
 		$_SESSION['flash'] = "L'utilisateur " . $nom . " a bien été modifié";
 		header("Location: ../admin.php");
 		exit();
 
 	} else { // sinon on modifie l'utilisateur dans la base de données
-		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp WHERE idutilisateur = :idutilisateur";
+		$query = "UPDATE utilisateur SET nom = :nom, email = :email, mp = :mp, avatar = :avatar WHERE idutilisateur = :idutilisateur";
 		$statement = $pdo->prepare($query);
-		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':idutilisateur' => $id]);
+		$statement->execute([':nom' => $nom, ':email' => $mail, ':mp' => $mp, ':avatar' => $avatar, ':idutilisateur' => $id]);
 		// on reset la session pour mettre à jour les données de l'utilisateur
 		session_reset();
 		// on recupere les données de l'utilisateur mis a jour

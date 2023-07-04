@@ -30,6 +30,11 @@ include_once "header.php";
 				<input type="text" name="email" value="<?= $user->email ?>">
 			</div>
 
+			<div class="m-3">
+				<label for="avarar">Votre avatar</label>
+				<input type="url" name="avatar" value="<?= $user->avatar ?>">
+			</div>
+
 			<div class="m-3"><label for="mp">Votre mot de passe</label>
 				<input type="password" name="mp" value="<?= $user->mp ?>">
 			</div>

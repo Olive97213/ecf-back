@@ -19,7 +19,8 @@ echo $message;?>
 
         <label for="email">Adresse e-mail :</label>
         <input type="email" name="email" id="email"><br><br>
-
+        
+        <label for="avatar">Avatar :</label>
         <input type="url" name="avatar" placeholder="URL de l'avatar">
 
         <label for="password">Mot de passe :</label>

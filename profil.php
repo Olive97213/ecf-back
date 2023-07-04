@@ -11,9 +11,8 @@ $statement = $pdo->prepare($query);
 $statement->execute();
 $users = $statement->fetchAll(PDO::FETCH_OBJ);
 
-
-include_once "header.php"; ?>
-
+include_once "header.php";
+?>
 
 <body>
 
@@ -26,15 +25,17 @@ include_once "header.php"; ?>
 			<?php endforeach; ?>
 			<?php unset($_SESSION['flash']); ?>
 		<?php endif; ?>
-		<h1>Bienvenu <?= $_SESSION['utilisateur']->nom ?></h1>
+		<h1>Bienvenue <?= $_SESSION['utilisateur']->nom ?></h1>
 		<p><?= $_SESSION['utilisateur']->email ?></p>
+		<?php if (!empty($_SESSION['utilisateur']->avatar)) : ?>
+			<img src="<?= $_SESSION['utilisateur']->avatar ?>" alt="Avatar de <?= $_SESSION['utilisateur']->nom ?>">
+		<?php endif; ?>
 		<p>
 			<a href="editionUser.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
-			<a href="action/deleteUser.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet utilisateur ?!`)" class="btn btn-danger" data-toggle="modal"><i class="bi bi-trash3-fill"></i> Delete</a>
+			<a href="action/deleteUser.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>" onclick="return window.confirm(`Êtes-vous sûr de vouloir supprimer cet utilisateur ?!`)" class="btn btn-danger" data-toggle="modal"><i class="bi bi-trash3-fill"></i> Delete</a>
 		</p>
 	</div>
 
-
 </body>
 
-</html>
+<?php include_once "footer.php"; ?>
