@@ -60,31 +60,26 @@ include_once "header.php";
 	</div>
 
 	<!-- Afficher les listes de souhaits -->
-	<h2>Mes listes de souhaits</h2>
-	<div class="container">
-		<?php foreach ($listesDeSouhait as $liste) : ?>
-			<div class="card-liste">
-				<div class="contenu-liste">
-					<h4><?= $liste->nom ?></h4>
-					<p><?= $liste->description ?></p>
-					
-
-					<!-- Afficher les articles de la liste de souhaits -->
-					<?php foreach ($liste->articles as $article) : ?>
-						<h5><?= $article->nom ?></h5>
-						<!-- <p><?= $article->description ?></p> -->
-					<?php endforeach; ?>
-					<p>Créée le <?= $liste->createdAt ?></p>
-					<p>
-					<button><a href="editionListe.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>">Edit</a></button>
-					<button><a href="action/deleteliste.php?id=<?= $_SESSION['utilisateur']->idutilisateur ?>" onclick="return window.confirm(`Êtes-vous sûr de vouloir supprimer cet utilisateur ?!`)" >Delete</a></button>
+<h2>Mes listes de souhaits</h2>
+<div class="container">
+	<?php foreach ($listesDeSouhait as $liste) : ?>
+		<div class="card-liste">
+			<div class="contenu-liste">
+				<h4><?= $liste->nom ?></h4>
+				<p><?= $liste->description ?></p>
+				
+				<!-- Afficher les articles de la liste de souhaits -->
+				<?php foreach ($liste->articles as $article) : ?>
+					<h5><?= $article->nom ?></h5>
+					<!-- <p><?= $article->description ?></p> -->
+				<?php endforeach; ?>
+				
+				<p>Créée le <?= $liste->createdAt ?></p>
+				<p>
+					<button><a href="editionListe.php?id=<?= $liste->idlisteDeSouhait ?>">Edit</a></button>
+					<button><a href="action/deleteliste.php?id=<?= $liste->idlisteDeSouhait ?>" onclick="return window.confirm(`Êtes-vous sûr de vouloir supprimer cette liste de souhaits ?!`)" >Delete</a></button>
 				</p>
-				</div>
-
-
 			</div>
-		<?php endforeach; ?>
-	</div>
-</body>
-
-<?php include_once "footer.php"; ?>
+		</div>
+	<?php endforeach; ?>
+</div>

@@ -4,8 +4,8 @@ require_once '../include/db.php';
 
 session_start();
 
-// On récupère l'id de la liste de souhaits dans l'URL
-$idListe = $_GET['id'];
+// On récupère l'id de la liste de souhaits à partir du formulaire
+$idListe = $_POST['idListe'];
 
 // On récupère les données du formulaire
 if (isset($_POST['edit'])) {
@@ -20,8 +20,7 @@ if (isset($_POST['edit'])) {
 
 	// On met à jour les articles de la liste de souhaits
 	$articles = $_POST['articles'];
-	foreach ($articles as $article) {
-		$idArticle = $article['id'];
+	foreach ($articles as $idArticle => $article) {
 		$nomArticle = $article['nom'];
 		$descriptionArticle = $article['description'];
 
@@ -31,6 +30,6 @@ if (isset($_POST['edit'])) {
 	}
 
 	// Redirection vers la page de la liste de souhaits
-	header("Location: ../editionListe.php?id=" . $idListe);
+	header("Location: ../profil.php");
 	exit();
 }
