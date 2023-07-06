@@ -15,52 +15,126 @@ if ($_SESSION['admin']->role != 1) {
 $query = "SELECT * FROM utilisateur";
 $statement = $pdo->prepare($query);
 $statement->execute();
-$users = $statement->fetchAll(PDO::FETCH_OBJ); ?>
+$users = $statement->fetchAll(PDO::FETCH_OBJ);
+
+// Récupérer toutes les listes de souhaits avec le nom de l'utilisateur créateur
+$query = "SELECT l.*, u.nom AS createur, u.avatar FROM listeDeSouhait l JOIN utilisateur u ON l.utilisateur_idutilisateur = u.idutilisateur";
+$statement = $pdo->prepare($query);
+$statement->execute();
+$listesDeSouhait = $statement->fetchAll(PDO::FETCH_OBJ); ?>
+
+
+
 
 <?php include_once "header.php"; ?>
+<link rel="stylesheet" href="link/admin.css">
 
-<body>
 
-	<div class="container-fluid">
-		<h1>Gestion des utilisateurs</h1>
-		<h2>Bonjour administrateur: <?= $_SESSION['admin']->nom ?></h2>
-		<a href="inscription.php" class="btn btn-primary">Ajouter un utilisateur</a>
-		<!-- on affiche les messages flash -->
-		<?php if (isset($_SESSION['flash']) && is_array($_SESSION['flash'])) : ?>
-			<?php foreach ($_SESSION['flash'] as $type => $message) : ?>
-				<div class="m-3 p-3 alert alert-<?= $type; ?>">
-					<?= $message; ?>
-				</div>
-			<?php endforeach; ?>
-			<?php unset($_SESSION['flash']); ?>
+
+<h1>Bonjour administrateur: <?= $_SESSION['admin']->nom ?></h1>
+
+<div class="container">
+
+
+	<!-- Affichage des informations de l'admin -->
+	<div class="admin">
+		<?php if (!empty($_SESSION['admin']->avatar)) : ?>
+			<img src="<?= $_SESSION['admin']->avatar ?>" alt="Avatar de <?= $_SESSION['admin']->nom ?>">
 		<?php endif; ?>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">Nom</th>
-					<th scope="col">mail</th>
-					<th scope="col">mp</th>
-					<th scope="col">role</th>
-					<th scope="col">action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- on affiche tous les utilisateurs -->
-				<?php foreach ($users as $user) : ?>
-					<tr>
-						<td><?= $user->nom ?></td>
-						<td><?= $user->email ?></td>
-						<td><?= $user->mp ?></td>
-						<td><?= $user->role ?></td>
-						<td><a href="editionUser.php?id=<?= $user->idutilisateur ?>" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
-							<br><a href="action/deleteUser.php?id=<?= $user->idutilisateur ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet utilisateur ?!`)" class="btn btn-danger" data-toggle="modal"><i class="bi bi-trash3-fill"></i> Delete</a>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+		<div class="contenu">
+			<h3><?= $_SESSION['admin']->nom ?></h3>
+			<p><?= $_SESSION['admin']->email ?></p>
+			<p>Rôle: Administrateur</p>
+
+			<button class="inscription"><a href="inscription.php">Ajouter un utilisateur</a></button>
+		</div>
 	</div>
 
-</body>
 
-</html>
+	<div class="titre-gestion">
+		<h2>Gestion des utilisateurs</h2>
+	</div>
+	<!-- on affiche les messages flash -->
+	<?php if (isset($_SESSION['flash']) && is_array($_SESSION['flash'])) : ?>
+		<?php foreach ($_SESSION['flash'] as $type => $message) : ?>
+			<div class="m-3 p-3 alert alert-<?= $type; ?>">
+				<?= $message; ?>
+			</div>
+		<?php endforeach; ?>
+		<?php unset($_SESSION['flash']); ?>
+	<?php endif; ?>
+
+	<!-- on affiche tous les utilisateurs -->
+	<?php foreach ($users as $user) : ?>
+		<div class="liste-user">
+			<?php if (!empty($user->avatar)) : ?>
+				<img src="<?php echo $user->avatar; ?>" alt="Avatar de <?php echo $user->avatar; ?>">
+			<?php endif; ?>
+			<div class="contenu">
+				<h3><?php echo $user->nom; ?></h3>
+				<p><?php echo $user->email; ?></p>
+				<p>Role:<?php echo $user->role; ?></p>
+				<button><a href="editionUser.php?id=<?= $user->idutilisateur ?>">Edit</a></button>
+				<button><a href="action/deleteUser.php?id=<?= $user->idutilisateur ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet utilisateur ?!`)">Delete</a></button>
+
+
+			</div>
+
+		</div>
+	<?php endforeach; ?>
+</div>
+
+<div class="titre-gestion">
+	<h2>Gestion liste de souhait</h2>
+</div>
+
+<div class="container-liste">
+	<?php foreach ($listesDeSouhait as $listeDeSouhait) : ?>
+		<div class="liste-de-souhait">
+			<?php if (!empty($listeDeSouhait->avatar)) : ?>
+				<img src="<?php echo $listeDeSouhait->avatar; ?>" alt="Avatar de <?php echo $listeDeSouhait->createur; ?>">
+			<?php endif; ?>
+			<div class="contenu">
+				<h3><?php echo $listeDeSouhait->nom; ?></h3>
+				<p><?php echo $listeDeSouhait->description; ?></p>
+
+				<!-- Récupérer les articles liés à la liste de souhait -->
+
+				<?php
+
+				$queryArticles = "SELECT a.* FROM article a JOIN listedesouhait_has_article la ON a.idArticle = la.article_idArticle WHERE la.listedesouhait_idlisteDeSouhait = :idListeDeSouhait";
+				$statementArticles = $pdo->prepare($queryArticles);
+				$statementArticles->bindValue(':idListeDeSouhait', $listeDeSouhait->idlisteDeSouhait);
+				$statementArticles->execute();
+				$articles = $statementArticles->fetchAll(PDO::FETCH_OBJ); ?>
+
+				<?php if (!empty($articles)) {
+					echo "<h4>Articles associés :</h4>";
+					echo "<ul>";
+					foreach ($articles as $article) {
+						echo "<li>{$article->nom}</li>";
+					}
+					echo "</ul>";
+				}
+				?>
+
+				<p>Créateur : <?php echo $listeDeSouhait->createur; ?></p>
+				<p>Date de publication : <?php echo $listeDeSouhait->createdAt; ?></p>
+
+			<?php endforeach; ?>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<?php include_once "footer.php"; ?>

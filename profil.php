@@ -6,6 +6,10 @@ logged_only();
 
 // Récupérer l'ID de l'utilisateur connecté
 $utilisateur_id = $_SESSION['utilisateur']->idutilisateur;
+// $utilisateur_id = $_SESSION['admin']->idutilisateur;
+
+
+
 
 // Récupérer toutes les listes de souhaits de l'utilisateur connecté
 $query = "SELECT * FROM listeDeSouhait WHERE utilisateur_idutilisateur = :utilisateur_id";
@@ -26,8 +30,10 @@ foreach ($listesDeSouhait as $liste) {
 }
 
 include_once "header.php";
-?>
+ ?>
 <link rel="stylesheet" href="link/profil.css">
+
+
 
 <body>
 	<h1>Bienvenue <?= $_SESSION['utilisateur']->nom ?></h1>

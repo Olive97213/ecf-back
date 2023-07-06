@@ -27,7 +27,8 @@ if (isset($_POST['submit'])) {
 
 				$_SESSION['admin'] = $user;
 				$_SESSION['flash'] = "Vous êtes connecté en tant qu'administrateur";
-				header('Location: ../admin.php');
+				header('Location: ../admin.php?id=' . $_SESSION['admin']->idutilisateur);
+
 				exit();
 			} else { // sinon on le connecte en tant qu'utilisateur
 

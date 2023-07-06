@@ -13,10 +13,7 @@ $statement = $pdo->prepare($query);
 $statement->execute([':idlisteDeSouhait' => $idListe]);
 $liste = $statement->fetch(PDO::FETCH_OBJ);
 
-// if (!$liste) {
-//     // Gérer le cas où la liste de souhaits n'existe pas
-//     die("La liste de souhaits spécifiée n'existe pas.");
-// }
+
 
 // Récupérer les articles associés à la liste de souhaits
 $query = "SELECT a.* FROM article AS a

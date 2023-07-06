@@ -33,16 +33,6 @@ include_once "header.php"; ?>
     
     <?php require "action/wishSelection.php"; ?>
 
-    <!-- <form action="action/addArticle.php" method="POST">
-        <label for="article">Article :</label>
-        <input type="text" id="article" name="article" required><br>
-
-        <label for="description">Description :</label>
-        <textarea id="description" name="description" required></textarea><br>
-
-        <input type="submit" name="submit" value="Ajouter article">
-    </form><br><br>
-        
-</form><br><br> -->
+    
 
 
