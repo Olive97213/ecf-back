@@ -85,21 +85,4 @@ $listesDeSouhait = $statement->fetchAll(PDO::FETCH_OBJ); ?>
 	<?php endforeach; ?>
 </div>
 
-
-
-
-
-			
-
-
-
-
-
-
-
-
-
-
-
-
-			<?php include_once "footer.php"; ?>
+<?php include_once "footer.php"; ?>
