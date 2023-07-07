@@ -47,6 +47,7 @@ $listesDeSouhait = $statement->fetchAll(PDO::FETCH_OBJ); ?>
 			<p>Rôle: Administrateur</p>
 
 			<button class="inscription"><a href="inscription.php">Ajouter un utilisateur</a></button>
+			<button class="inscription"><a href="adminListe.php">Gestion liste de souhait</a></button>
 		</div>
 	</div>
 
@@ -84,47 +85,11 @@ $listesDeSouhait = $statement->fetchAll(PDO::FETCH_OBJ); ?>
 	<?php endforeach; ?>
 </div>
 
-<div class="titre-gestion">
-	<h2>Gestion liste de souhait</h2>
-</div>
 
-<div class="container-liste">
-	<?php foreach ($listesDeSouhait as $listeDeSouhait) : ?>
-		<div class="liste-de-souhait">
-			<?php if (!empty($listeDeSouhait->avatar)) : ?>
-				<img src="<?php echo $listeDeSouhait->avatar; ?>" alt="Avatar de <?php echo $listeDeSouhait->createur; ?>">
-			<?php endif; ?>
-			<div class="contenu">
-				<h3><?php echo $listeDeSouhait->nom; ?></h3>
-				<p><?php echo $listeDeSouhait->description; ?></p>
 
-				<!-- Récupérer les articles liés à la liste de souhait -->
 
-				<?php
 
-				$queryArticles = "SELECT a.* FROM article a JOIN listedesouhait_has_article la ON a.idArticle = la.article_idArticle WHERE la.listedesouhait_idlisteDeSouhait = :idListeDeSouhait";
-				$statementArticles = $pdo->prepare($queryArticles);
-				$statementArticles->bindValue(':idListeDeSouhait', $listeDeSouhait->idlisteDeSouhait);
-				$statementArticles->execute();
-				$articles = $statementArticles->fetchAll(PDO::FETCH_OBJ); ?>
-
-				<?php if (!empty($articles)) {
-					echo "<h4>Articles associés :</h4>";
-					echo "<ul>";
-					foreach ($articles as $article) {
-						echo "<li>{$article->nom}</li>";
-					}
-					echo "</ul>";
-				}
-				?>
-
-				<p>Créateur : <?php echo $listeDeSouhait->createur; ?></p>
-				<p>Date de publication : <?php echo $listeDeSouhait->createdAt; ?></p>
-
-			<?php endforeach; ?>
-
-			</div>
-
+			
 
 
 
