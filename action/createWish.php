@@ -19,7 +19,8 @@ if (isset($_POST['submit'])) {
     $statement->bindValue(':utilisateur_idutilisateur', $user);
     $statement->execute();
 
-   
+    header("Location: ../wish.php");
+    exit();
 } 
 
 

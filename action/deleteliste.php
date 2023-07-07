@@ -4,6 +4,8 @@ require_once '../include/db.php';
 // Récupérer l'identifiant de la liste de souhaits à supprimer
 $idListe = $_GET['id'];
 
+$pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
+
 // Supprimer les enregistrements associés dans listedesouhait_has_article
 $query = "DELETE FROM listedesouhait_has_article WHERE listeDeSouhait_idlisteDeSouhait = :idliste";
 $statement = $pdo->prepare($query);
@@ -13,6 +15,9 @@ $statement->execute([':idliste' => $idListe]);
 $query = "DELETE FROM listeDeSouhait WHERE idlisteDeSouhait = :idliste";
 $statement = $pdo->prepare($query);
 $statement->execute([':idliste' => $idListe]);
+
+// Réactiver les contraintes de clé étrangère
+$pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 
 // Rediriger vers une page appropriée après la suppression
 header("Location: ../profil.php");
